@@ -4,13 +4,13 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=puredata
-pkgver=0.43_0
+pkgver=0.54.0
 pkgrel=1
 pkgdesc="The Pure Data real-time music and multimedia environment"
 arch=('i686' 'x86_64')
 url="http://crca.ucsd.edu/~msp/software.html"
 license=('BSD' 'GPL')
-depends=('jack' 'tk')
+depends=('tk', 'jack')
 optdepends=('pd-arraysize:'
 			'pd-boids:'
 			'pd-bsaylor:'
@@ -39,12 +39,12 @@ optdepends=('pd-arraysize:'
 			'pd-windowing:'
 			'pd-zexy:')
 
-source=(http://crca.ucsd.edu/~msp/Software/pd-${pkgver/_/-}.src.tar.gz)
+source=(http://crca.ucsd.edu/~msp/Software/pd-${pkgver/-/-}.src.tar.gz)
 
 
 build() {
   cd "$srcdir/pd-${pkgver/_/-}/src"
-  ./configure --prefix=/usr --mandir=/usr/share/man --enable-alsa --enable-jack
+  ./configure --prefix=/usr --mandir=/usr/share/man --enable-jack --disable-oss --disable-portaudio --enable-fftw
   make
 }
 
